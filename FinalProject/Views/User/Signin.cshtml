@@ -1,0 +1,27 @@
+﻿@model FinalProject.Models.User
+
+@Html.Raw(ViewBag.abc)
+
+<section class="credential">
+    <div class="container">
+        <div class="form">
+            @using (Html.BeginForm("Signin", "User", FormMethod.Post))
+            {
+                <div class="title">Sign in</div>
+
+                @Html.LabelFor(model => model.Email)
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Enter email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Enter password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "validation-message" })
+
+                <input class="btn" type="submit" value="Sign in">
+            }
+        </div>
+            <div class="or"><span>or</span></div>
+            <span style="color: rgb(62, 62, 62);margin-right:5px">New User?</span><a href="@Url.Action("Signup", "User")"><span style="color: rgb(7, 115, 209);">Create Account</span></a>
+
+    </div>
+</section>

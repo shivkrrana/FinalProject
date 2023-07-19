@@ -1,0 +1,75 @@
+﻿@model List<FinalProject.Models.Product>
+@{
+    ViewBag.Title = "ProductGrid";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Raw(TempData["AddProduct"])
+@Html.Raw(TempData["EditProduct"])
+@Html.Raw(TempData["DeleteProduct"])
+
+<section class="productgrid">
+    <div class="heading-add">
+        <div class="heading">Products</div>
+        <a href="@Url.Action("AddProduct", "Admin")"><div class="addbtn">Add New Product</div></a>
+    </div>
+    <div class="product-container">
+
+        @{
+            if (Model.Count > 0)
+            {
+                foreach (var i in Model)
+                {
+                    var imgSrc = "";
+                    if (i.ProductImages.Count > 0)
+                    {
+                        foreach(var j in i.ProductImages)
+                        {
+                            if(j!=null)
+                            {
+                                var base64 = Convert.ToBase64String(j.Data);
+                                imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+                                break;
+                            }
+                        }
+
+                    }
+
+                    <div class="box">
+                        <div class="imgBx">
+                            <img src="@imgSrc" />
+                        </div>
+                        <div class="product-name">
+                            @i.Title
+                        </div>
+                        <div class="product-price">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>@i.Price.ToString("#,##,##,###.##")
+                        </div>
+                        <div class='edit-delete'>
+                            <a href="@Url.Action("EditProduct", "Admin",new { id = i.ProductId })">
+                                <button class='edit'>Edit</button>
+                            </a>
+                            <a href="@Url.Action("DeleteProduct", "Admin",new { id = i.ProductId })">
+                                <button class='delete'>Delete</button>
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="productNotFound">No Product Found</div>
+            }
+        }
+        
+
+
+
+
+
+
+
+
+    </div>
+</section>
+

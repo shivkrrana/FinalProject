@@ -1,0 +1,64 @@
+﻿@model IEnumerable<FinalProject.Models.User>
+
+@{
+    ViewBag.Title = "Customers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<section style="margin-left:50px;margin-top:30px">
+    <div style="font-size:35px">Customers</div>
+    <div style="width:1080px;margin-top:20px">
+        <table class="table table-bordered table-hover table-striped " style="border-radius:10px">
+            <thead class="bg-white">
+                <tr>
+                    <th style="text-align:center">
+                        @Html.DisplayNameFor(model => model.UserId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Mobile)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Role)
+                    </th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    if (item.Role != "Admin")
+                    {
+                        <tr>
+                            <td style="text-align:center">
+                                @Html.DisplayFor(modelItem => item.UserId)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Mobile)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Role)
+                            </td>
+                            <td>
+                                <a href="@Url.Action("DeleteCustomer", "Admin", new { id = item.UserId })">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        </div>
+       </div>
+</section>

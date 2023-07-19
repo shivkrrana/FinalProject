@@ -1,0 +1,135 @@
+﻿@model List<FinalProject.Models.Product>
+
+@Html.Raw(TempData["alertSignup"])
+@if (User.IsInRole("Customer"))
+{
+    @Html.Raw(TempData["alertSignin"]);
+}
+@Html.Raw(TempData["feedback"])
+@Html.Raw(TempData["product"])
+
+<section class="store_info">
+    <div class="content">
+        <h4>WELCOME TO</h4>
+        <h1>Rana Store</h1>
+        <p>At RANA STORE, we are passionate about delivering an exceptional mobile shopping experience that combines convenience, style, and innovation. Our goal is to connect you with a world of possibilities right at your fingertips, transforming the way you browse, discover, and shop for your favorite products.</p>
+        <a href="@Url.Action("ProductList","Product")"><button>SHOP NOW</button></a>
+    </div>
+    <img src="@Url.Content("~/Images/iphone.png")" alt="">
+</section>
+
+<section class="new_arrival">
+    <div class="new_product">
+        <h4>CHECK NOW</h4>
+        <h1>Our New Products</h1>
+        <div class="products">
+
+            @{
+                foreach (var item in Model)
+                {
+                    var imgSrc = "";
+                    if (item.ProductImages.Count > 0)
+                    {
+                        foreach (var j in item.ProductImages)
+                        {
+                            if (j != null)
+                            {
+                                var base64 = Convert.ToBase64String(j.Data);
+                                imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+                                break;
+                            }
+                        }
+
+                    }
+
+                    <div class="box">
+                        <a href="@Url.Action("ProductDetail","Product",new {id = item.ProductId})">
+                            <div class="imgBx">
+                                <img src="@imgSrc" />
+                            </div>
+                        </a>
+
+                        <div class="product-name">
+                            @item.Title
+                        </div>
+                        <div class='price-cart'>
+                            <div class='price'><i class="fa-solid fa-indian-rupee-sign"></i><span>@item.Price.ToString("#,##,##,###.##")</span></div>
+                            @using (Ajax.BeginForm("AddToCart", "User", new { id = item.ProductId, quantity = 1 },
+                                                new AjaxOptions()
+                                                {
+                                                    HttpMethod = "POST",
+                                                    InsertionMode = InsertionMode.Replace,
+                                                    UpdateTargetId = "kart",
+                                                    LoadingElementDuration = 1000,
+                                                    LoadingElementId = "loader"
+                                                }))
+                            {
+
+                                
+                                    <button class='addtocart' type="submit">ADD TO CART</button>
+                                
+                            }
+
+                        </div>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</section>
+
+
+<section class="extrafeautres">
+    <div class="container">
+        <div class="horizontal">
+
+            <i class="fa-solid fa-truck"></i>
+
+            <div class="text">
+                Super Fast and Free Delivery
+            </div>
+        </div>
+
+        <div>
+            <div class="vertical">
+                <i class="fa-sharp fa-solid fa-shield"></i>
+                <div class="text">Non-Contact Shipping</div>
+            </div>
+            <br>
+            <div class="vertical">
+                <i class="fa-solid fa-hand-holding-heart"></i>
+                <div class="text">Money-back Guaranteed</div>
+            </div>
+        </div>
+
+        <div class="horizontal">
+
+            <i class="fa fa-duotone fa-lock"></i>
+
+            <div class="text">
+                Super Secure Payment System
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<section class="trust">
+    <div>
+        <h3 style="text-align: center;">Trusted By 100+ Companies</h3>
+        <div class="company">
+            <a href="https://www.apple.com/iphone/"><img src="@Url.Content("~/Images/logo/apple.png")" /></a>
+            <a href="https://www.oneplus.in/store/phone"><img src="@Url.Content("~/Images/logo/oneplus.png")" /></a>
+            <a href="https://www.samsung.com/in/smartphones/"><img src="@Url.Content("~/Images/logo/samsung.png")" /></a>
+            <a href="https://www.vivo.com/in/products"><img src="@Url.Content("~/Images/logo/vivo.png")" /></a>
+            <a href="https://www.mi.com/in/phone"><img src="@Url.Content("~/Images/logo/mi.png")" /></a>
+        </div>
+
+    </div>
+</section>
+
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

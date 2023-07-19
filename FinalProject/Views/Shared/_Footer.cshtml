@@ -1,0 +1,30 @@
+﻿
+<footer>
+    <div class="container">
+        <div class="content">
+            <div class="title">Rana Technical</div>
+            <small>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit nihil fugiat obcaecati suscipit unde. Itaque.</small>
+
+        </div>
+        <div class="content">
+            <div class="title">Send your important feedbacks</div>
+            @using (Html.BeginForm("Index", "Feedback", FormMethod.Post))
+            {
+                <div>
+                    <input type="text" name="message" placeholder = "feedback" style="display:block"/>
+                    <button class="btn" type="submit">Send</button>
+                </div>
+            }
+        </div>
+        <div class="content">
+            <div class="title">Follow Us</div>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-twitter"></i>
+        </div>
+        <div class="content">
+            <div class="title">Call Us</div>
+            <small>+91 123467890</small>
+        </div>
+    </div>
+</footer>

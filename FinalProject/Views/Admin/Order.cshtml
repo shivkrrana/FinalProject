@@ -1,0 +1,56 @@
+﻿@model IEnumerable<FinalProject.Models.Order>
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section style="margin-left:50px;margin-top:30px">
+    <div style="font-size:35px">Orders</div>
+    <div style="width:1080px;margin-top:20px;">
+        <table class="table table-bordered table-hover table-striped ">
+            <thead class="bg-white">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OrderId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PaymentMode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedDate)
+                    </th>
+                </tr>
+                </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaymentMode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedDate)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </div>
+        </div>
+</section>

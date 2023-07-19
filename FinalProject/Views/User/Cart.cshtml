@@ -1,0 +1,112 @@
+﻿@model List<FinalProject.Models.Cart>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="checkout-container">
+
+    <div class="checkout-table">
+        <div class="cartwithname">
+
+        </div>
+        <div class="table-head">
+            <ul>
+                <li class="table-item">ITEM</li>
+                <li class="table-price">PRICE</li>
+                <li class="table-quantity">QUANTITY</li>
+                <li class="table-subtotal">SUBTOTAL</li>
+                <li class="table-remove">REMOVE</li>
+            </ul>
+        </div>
+
+
+        @if ((int)Session["Count"] != 0)
+        {
+
+            int sum = 0;
+            for (int i = 0; i < Model.Count(); i++)
+            {
+                var base64 = Convert.ToBase64String(Model[i].Product.ProductImages[0].Data);
+                var imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+
+                <div class="eachItem">
+                    <div class="ITEM">
+                        <img src="@imgSrc"></img>
+                        <span class="title">@Model[i].Product.Title</span>
+                    </div>
+                        <div class="PRICE">@Model[i].Product.Price.ToString("#,##,##,###.##")</div>
+                        <div class="QUANTITY">
+                            @using (Html.BeginForm("AddCartItem", "User", new { id = Model[i].ProductId, quantity = -1 }, FormMethod.Post))
+                            {
+                                <button class="sign" type="submit">-</button>
+                            }
+                            <div class='qty'>@Model[i].Quantity</div>
+                            @using (Html.BeginForm("AddCartItem", "User", new { id = Model[i].ProductId, quantity = 1 }, FormMethod.Post))
+                            {
+                                <button class="sign" type="submit" onmousemove="mouseInStock(@i, @Model[i].Product.Inventory.Stock,@Model[i].Quantity)" onmouseout="mouseOutStock(@i)">+</button>
+                            }
+                            <div class="maxValue stockMessage" id="maxval" style="display:none">Max value reached</div>
+                        </div>
+                        <div class="SUBTOTAL">@((Model[i].Product.Price * Model[i].Quantity).ToString("#,##,##,###.##"))</div>
+                        <div class="REMOVE">
+                            <a href="@Url.Action("DeleteCartItem", "User", new {id = Model[i].CartId})"><i class="fa-regular fa-trash-can" class="REMOVE"></i></a>
+                        </div>
+                </div>
+                sum += (Model[i].Product.Price * Model[i].Quantity);
+            }
+
+            <div class="table-bottom">
+                <a href="@Url.Action("ClearCart", "User")"><div class="clearcart" onClick={clearCart}>Clear Cart</div></a>
+            </div>
+
+
+            <div class="card">
+                <div class="subtotal">
+                    <div class="price-text">Subtotal:</div>
+                    <div class="price"><i class="fa-solid fa-indian-rupee-sign"></i>@sum.ToString("#,##,##,###.##")</div>
+                </div>
+                <div class="subtotal">
+                    <div class="price-text">Shipping Fee:</div>
+                    <div class="price">
+                        <i class="fa-solid fa-indian-rupee-sign"></i>
+                        @((sum * 0.02).ToString("#,##,##,###.##"))
+                    </div>
+                </div>
+                <hr class="hr"></hr>
+                <div class="subtotal">
+                    <div class="price-text">Order Total:</div>
+                    <div class="price"><i class="fa-solid fa-indian-rupee-sign"></i>@((sum * 0.02 + sum).ToString("#,##,##,###.##"))</div>
+                </div>
+                <a href="@Url.Action("CheckOut", "User")"><div class="proceedtocheckout">Proceed To Checkout</div></a>
+            </div>
+
+        }
+        else
+                        {
+            <div class="noCartItem">Your Cart is Empty</div>
+            <div class="table-bottom">
+            </div>
+        }
+
+
+
+    </div>
+</section>
+<script>
+
+    const maxval = document.querySelectorAll(".stockMessage");
+
+    function mouseInStock(i, stock, qty) {
+        if (parseInt(qty) === parseInt(stock)) {
+            maxval[i].style.display = "block";
+        }
+    }
+    function mouseOutStock(i) {
+        maxval[i].style.display = "none";
+    }
+
+</script>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

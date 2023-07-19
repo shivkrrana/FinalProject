@@ -1,0 +1,117 @@
+
+.orders {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 110px;
+    margin-bottom: 50px;
+    
+}
+.orders .title{
+    margin-bottom:10px;
+    font-size:35px;
+}
+.orders .orderNotFound {
+    font-size: 50px;
+    color: #c5c5c5;
+    text-align: center;
+}
+.orders .container{
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 10px;
+    width: 800px;
+    margin-bottom:20px;
+}
+.orders .container hr{
+    color: rgb(168, 168, 168);
+}
+.orders .container .tablehead{
+    display: flex;
+    justify-content: space-between;
+    background-color: #f0f2f2;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    padding: 10px 30px;
+    
+}
+.orders .container .tablehead .content{
+    position:relative;
+}
+.orders .container .tablehead .content .address{
+    position: absolute;
+    top:59px;
+    left: 0;
+    z-index: 1;
+    font-size: 15px;
+    padding: 10px;
+    border: 1px solid rgb(164, 164, 164);
+    border-radius: 10px;
+    min-width: 250px;
+    background-color: #ffffff;
+}
+.orders .container .tablehead .content .contenttitle{
+    font-size: 15px;
+    font-weight: bold;
+}
+.orders .container .tablehead .content .contentvalue{
+    font-size: 15px;
+    cursor: pointer;
+}
+.orders .container .productrow{
+    display: flex;
+    align-items: center;
+    margin: 15px 15px;
+}
+.orders .container .productrow .img{
+    margin-right: 30px;
+    position:relative;
+}
+
+.orders .container .productrow .img .quantity{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 1.5px solid rgb(138, 138, 138);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 8px;
+    color: #363636;
+    position: absolute;
+    top:0;
+    right:0;
+    z-index: 3;
+    font-weight:bold;
+}
+
+.orders .container .productrow .img img{
+    width: 100px;
+    height: 100px;
+}
+.orders .container .productrow .titleandaction{
+    
+}
+.orders .container .productrow .titleandaction .producttitle{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+.orders .container .productrow .titleandaction .btns{
+    display:flex;
+
+}
+.orders .container .productrow .titleandaction .btns .btn1{
+    background-color: #4f61e9;
+    border-radius: 5px;
+    padding: 5px 15px;
+    color:white;
+    border:none;
+    cursor: pointer;
+    margin-right: 5px;
+}
+.orders .container .productrow .titleandaction .btns .btn2{
+    border-radius: 5px;
+    padding: 5px 15px;
+    border:none;
+    cursor: pointer;
+}

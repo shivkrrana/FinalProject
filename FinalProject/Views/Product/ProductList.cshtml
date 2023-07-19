@@ -1,0 +1,130 @@
+﻿@model List<FinalProject.Models.Product>
+
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="product_list">
+    <div class="main_container">
+        <header>
+            @using (Html.BeginForm("ProductList", "Product", FormMethod.Post))
+            {
+                <input class="search" name="search" value="@ViewBag.search" type="text" placeholder="Search">
+                <input type="submit" style="display:none"/>
+            }
+
+            <div class="headerAboveContent">
+                <div class="view">
+                    <i class="fa-solid fa-grip"></i>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="count">Total Products - @Model.Count()</div>
+                <!-- <div class="filter"> -->
+                <select name="cars" id="sort" onchange="redirectToUrl(this)">
+                    <option value="@Url.Action("Sort","Product", new {str = "abc" })" id="abc">Filter</option>
+                    <option value="@Url.Action("Sort","Product", new {str = "az" })" id="az">Sort(A-Z)</option>
+                    <option value="@Url.Action("Sort","Product", new {str = "za" })" id="za">Sort(Z-A)</option>
+                    <option value="@Url.Action("Sort","Product", new {str = "lh" })" id="lh">Price(Low-High)</option>
+                    <option value="@Url.Action("Sort","Product", new {str = "hl" })" id="hl">Price(High-Low)</option>
+                </select>
+                <!-- </div> -->
+            </div>
+        </header>
+        <div class="sub_container">
+            <div class="sidebar">
+                <div class="sub">
+                    <div class="heading">Category</div>
+                    <a href="@Url.Action("Category", "Product", new { id = -1})"><div class="text" id="all">All</div></a>
+                    @{
+                        foreach (var i in ViewBag.Categories)
+                        {
+                            <a href="@Url.Action("Category", "Product", new {id = i.CategoryId})"><div class="text" id="cat+@i.CategoryId">@i.Name</div></a>
+                        }
+                    }
+                </div>
+
+                <div class="sub">
+                    <div class="heading">Brands</div>
+                    @{
+                        foreach (var i in ViewBag.Brands)
+                        {
+                            <a href="@Url.Action("Brand", "Product", new {id = i.BrandId})"><div class="text" id="brand+@i.BrandId">@i.Name</div></a>
+                        }
+                    }
+                </div>
+                <div class="sub">
+                    <a href="@Url.Action("ClearFilter", "Product")"><div class="btn">Clear Filter</div></a>
+                </div>
+
+                </div>
+                <div class="container">
+
+                    @{
+                        foreach (var item in Model)
+                        {
+                            var imgSrc = "";
+                            if (item.ProductImages.Count > 0)
+                            {
+                                foreach (var j in item.ProductImages)
+                                {
+                                    if (j != null)
+                                    {
+                                        var base64 = Convert.ToBase64String(j.Data);
+                                        imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+                                        break;
+                                    }
+                                }
+
+                            }
+
+                            <div class="box">
+                                <a href="@Url.Action("ProductDetail","Product",new {id = item.ProductId})"><div class="imgBx">
+                                    <img src="@imgSrc" />
+                                </div></a>
+
+
+                                <div class='price-cart'>
+                                    <div class="product-name">
+                                        @item.Title
+                                    </div>
+                                    <div class='price'><i class="fa-solid fa-indian-rupee-sign"></i><span>@item.Price.ToString("#,##,##,###.##")</span></div>
+
+                                </div>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+    </div>
+</section>
+
+<script>
+    var cat = '@Html.Raw(Session["CategorySelected"])';
+    var brand = '@Html.Raw(Session["BrandSelected"])';
+    var sort = '@Html.Raw(Session["SortSelected"])';
+
+    if (cat == "") {
+        document.getElementById('all').classList.add("selectedCategoryBrand");
+    }
+    else {
+        document.getElementById(`cat+${cat}`).classList.add("selectedCategoryBrand");
+    }
+    if (brand != "") {
+        document.getElementById(`brand+${brand}`).classList.add("selectedCategoryBrand");
+    }
+
+    function redirectToUrl(option) {
+        var selectedOption = option.value;
+        if (selectedOption !== "") {
+            window.location.href = selectedOption;
+        }
+    }
+    console.log(sort);
+    if (sort != "") {
+        document.getElementById(sort).selected = true;
+    }
+    
+
+</script>

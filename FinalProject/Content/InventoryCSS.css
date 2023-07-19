@@ -1,0 +1,71 @@
+
+.inventory{
+    padding:30px 38px;
+}
+.inventory .title{
+    font-size: 35px;
+    margin-bottom: 20px;
+}
+.inventory .container{
+    /*display: flex;*/
+    padding:0;
+    
+}
+.inventory .container .sub-container{
+    border: 1px solid rgb(185, 185, 185);
+    border-radius: 10px;
+}
+.inventory .container .sub-container .noproductfound{
+    font-size: 50px;
+    color: #c5c5c5;
+    text-align: center;
+}
+.inventory .container .heading{
+    display: flex;
+    border-bottom: 1px solid rgb(185, 185, 185);
+    padding: 15px 0;
+    background-color: #e6e8fc;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.inventory .container .heading .head-title{
+    width: 200px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.inventory .container .row{
+    display: flex;
+    margin: 15px 0;
+}
+    .inventory .container .row .row-data {
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+.inventory .container .row .row-data .action{
+    display:flex;
+    align-items:center;
+}
+.inventory .container .row .row-data .action input{
+    border: 1px solid rgb(185, 185, 185);
+    border-radius: 5px;
+    width: 60px;
+    outline: none;
+    height: 30px;
+    padding: 10px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+    margin-right: 5px;
+}
+.inventory .container .row .row-data .action .btn{
+     padding: 3px 15px; 
+    /*height: 30px;
+    width: 40px;*/
+    background-color: #4f61e9;
+    border-radius: 5px;
+    color: white;
+    border:none;
+    cursor: pointer;
+}

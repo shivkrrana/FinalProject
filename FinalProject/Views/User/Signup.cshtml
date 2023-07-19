@@ -1,0 +1,34 @@
+﻿@model FinalProject.Models.User
+
+@Html.Raw(ViewBag.alert)
+
+<section class="credential">
+    <div class="container">
+        <div class="form">
+            @using (Html.BeginForm("Signup", "User", FormMethod.Post))
+            {
+                <div class="title">Sign up</div>
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { placeholder = "Enter name" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "validation-message", })
+
+                @Html.LabelFor(model => model.Email)
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { placeholder = "Enter email" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.Mobile)
+                @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { placeholder = "Enter Mobile No" } })
+                @Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { placeholder = "Enter password" } })
+                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.ConfirmPassword)
+                @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { placeholder = "Enter confirm password" } })
+                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "validation-message" })
+                <input class="btn" type="submit" value="Sign up" />
+            }
+        </div>
+    </div>
+</section>

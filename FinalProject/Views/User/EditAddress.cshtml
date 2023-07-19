@@ -1,0 +1,51 @@
+﻿@model FinalProject.Models.Address
+
+@{
+    ViewBag.Title = "EditAddress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="credential">
+    <div class="container">
+        <div class="form inputaddress">
+            @using (Html.BeginForm("EditAddress", "User", FormMethod.Post))
+            {
+                <div class="title">Edit Address</div>
+                @Html.HiddenFor(model=>model.AddressId)
+                @Html.LabelFor(model => model.Name)
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { placeholder = "Enter name" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "validation-message", })
+
+                @Html.LabelFor(model => model.Phone)
+                @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { placeholder = "Enter Mobile No" } })
+                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.Pincode)
+                @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { placeholder = "Enter Pincode" } })
+                @Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.Region1)
+                @Html.EditorFor(model => model.Region1, new { htmlAttributes = new { placeholder = "Enter Address 1" } })
+                @Html.ValidationMessageFor(model => model.Region1, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.Region2)
+                @Html.EditorFor(model => model.Region2, new { htmlAttributes = new { placeholder = "Enter Address 2" } })
+                @Html.ValidationMessageFor(model => model.Region2, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.Landmark)
+                @Html.EditorFor(model => model.Landmark, new { htmlAttributes = new { placeholder = "Enter Landmark" } })
+
+                @Html.LabelFor(model => model.City)
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { placeholder = "Enter City" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "validation-message" })
+
+                @Html.LabelFor(model => model.State)
+                @Html.EditorFor(model => model.State, new { htmlAttributes = new { placeholder = "Enter State" } })
+                @Html.ValidationMessageFor(model => model.State, "", new { @class = "validation-message" })
+
+                <input class="btn" type="submit" value="Save" />
+            }
+        </div>
+    </div>
+</section>
+

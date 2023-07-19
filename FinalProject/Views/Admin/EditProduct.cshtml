@@ -1,0 +1,43 @@
+﻿@model FinalProject.Models.Product
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Html.Raw(ViewBag.product)
+
+
+<div class="form-container">
+
+    @using (Html.BeginForm("EditProduct", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form" }))
+    {
+        <div class="title">Edit Product</div>
+        @Html.HiddenFor(model=>model.ProductId)
+        @Html.LabelFor(model => model.Title)
+        @Html.TextBoxFor(model => model.Title, new { @class = "", placeholder = "Product Title" })
+        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "validation-message" })
+
+        @Html.LabelFor(model => model.Description)
+        @Html.TextAreaFor(model => model.Description, new { @class = "", placeholder = "Description" })
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "validation-message" })
+
+        @Html.LabelFor(model => model.Price)
+        @Html.TextBoxFor(model => model.Price, new { @class = "", placeholder = "Enter Price" })
+        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "validation-message" })
+
+        @Html.DropDownListFor(model => model.CategoryId, Session["Categories"] as SelectList, "Category", new { @class = "", id = "category" })
+
+        @Html.DropDownListFor(model => model.BrandId, Session["Brands"] as SelectList, "Brand", new { @class = "" })
+
+        @*<div id="allfile"></div>
+        <div id="allimg" style="display: flex;"></div>
+
+        <div class="btn" style="width: 150px;margin-top: 5px;" onclick="selectFile()">Add Image</div>*@
+        <input class="btn" type="submit" value="Save">
+
+
+        @*<button type="button" class="btn btn-primary" onclick="addImage()">Add Image</button>
+            <input type="submit" class="btn" value="Add">*@
+    }
+
+</div>

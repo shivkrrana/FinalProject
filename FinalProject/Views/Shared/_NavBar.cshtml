@@ -1,0 +1,74 @@
+﻿
+<nav class="flex_space">
+    <a href="@Url.Action("Index", "Home")">
+        <div class="logo">
+            <div class="rana">RANA</div><div class="store">STORE</div>
+        </div>
+    </a>
+    <div class="flex_space">
+        <ul class="links">
+            <a href="@Url.Action("Index", "Home")">
+            <li>Home</li>
+            </a>
+            <a href="@Url.Action("ProductList", "Product")">
+            <li>Products</li>
+            </a>
+            <li>About</li>
+
+            <li>Contact</li>
+        </ul>
+
+        @{
+            if (User.Identity.IsAuthenticated)
+            {
+                <div class="dropdown">
+                    <div class="welcome" id="welcome">
+                        Welcome, Shiv Kumar Rana <i class="fa-solid fa-caret-down"></i>
+                    </div>
+                    <div id="myDropdown" class="dropdown-content" style="display:none">
+                        <a href="@Url.Action("Orders", "User")">Your Orders</a>
+                    </div>
+                </div>
+
+                <a href="@Url.Action("Signout", "User")">
+                    <button class='auth'>
+                        Log out
+                    </button>
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Action("Signin", "User")">
+                    <button class='auth'>
+                        Log in
+                    </button>
+                </a>
+            }
+        }
+
+
+        <a href="@Url.Action("Cart", "User")">
+            <div class="nav-cart">
+                <i class="fa fa-solid fa-cart-shopping"></i>
+                @if (User.IsInRole("Customer"))
+                {
+                    <div class="badge" id="kart">@Session["Count"]</div>
+                }
+
+            </div>
+        </a>
+    </div>
+    <div class="loading" id="loader" style="display:none"></div>
+</nav>
+
+<script>
+    const myDropdown = document.getElementById("myDropdown");
+    const welcome = document.getElementById("welcome");
+    welcome.addEventListener('click', () => {
+        if (myDropdown.style.display === "none") {
+            myDropdown.style.display = "block";
+        } else {
+            myDropdown.style.display = "none";
+        }
+    })
+</script>

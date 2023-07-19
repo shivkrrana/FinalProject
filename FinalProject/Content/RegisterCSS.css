@@ -1,0 +1,71 @@
+
+
+
+.credential {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*height: 700px*/
+    margin-top:110px;
+    margin-bottom:50px;
+}
+.credential .container{
+    /* border: 1px solid rgb(188, 188, 188); */
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+}
+
+.credential .container .form .title{
+    font-size: 35px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+.credential .container .form label{
+    font-size: 18px;
+    color: #464646;
+    /* margin-bottom: 10px; */
+}
+.credential .container .form input{
+    width: 300px;
+    display: block;
+    outline: none;
+    border: 1px solid rgb(227, 227, 227);
+    border-radius:5px ;
+    height: 40px;
+    margin-top: 3px;
+    padding: 10px;
+    font-size: 15px;
+}
+    .credential .container .form .btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        background-color: #4f61e9;
+        border-radius: 5px;
+        padding: 6px 15px;
+        font-size: 18px;
+        color: white;
+        /*width: auto;*/
+        /* margin:0 20px; */
+        /*width: fit-content;*/
+        border: none;
+        cursor: pointer;
+    }
+    
+    .credential .container .or {
+        position: relative;
+        border: 1px solid rgb(143, 143, 143);
+        margin: 30px 0;
+    }
+
+        .credential .container .or span {
+            position: absolute;
+            z-index: 1;
+            left: 134px;
+            top: -17px;
+            background-color: white;
+            color: rgb(143, 143, 143);
+            padding: 0 4px;
+            font-size: 20px;
+        }

@@ -1,0 +1,86 @@
+﻿@model List<FinalProject.Models.Address>
+
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section >
+    @using (Html.BeginForm("PlaceOrder", "Payment", FormMethod.Post, new {@class="checkout"}))
+    {
+        <div class="delpayment">
+            <div class="delivery">
+                <div class="selectaddress">
+                    Select a delivery address
+                </div>
+                @{
+                    int inc = 1;
+                }
+
+                @foreach (var i in Model)
+                {
+                    <div class="eachAddress">
+                        <input type="radio" name="address" id="@("address" + inc)" value="@i.AddressId" checked required>
+                        <label for="@("address" + inc)">
+                            <span>@i.Name</span>
+                            @i.Region1, @i.Region2, @i.City, @i.State, @i.Pincode, India, Phone number: @i.Phone &nbsp;
+                            <a href="@Url.Action("EditAddress", "User", new {id = i.AddressId})">Edit</a> | <a href="@Url.Action("DeleteAddress", "User", new {id = i.AddressId})">Delete</a>
+                        </label>
+
+                    </div>
+                    inc++;
+                }
+
+                <a href="@Url.Action("AddAddress","User")"><div class="btn">Add new Address</div></a>
+            </div>
+            <div class="payment">
+                <div class="selectpayment">
+                    Select a payment method
+                </div>
+                <div class="paymentmethod">
+                    <input type="radio" name="payment" id="pay1" value="COD" onclick="placeOrderFun1()" required>
+                    <label for="pay1" onclick="placeOrderFun1()">
+                        Cash on Delivery/Pay on Delivery
+                    </label>
+                </div>
+                <div class="paymentmethod">
+                    <input type="radio" name="payment" id="pay2" value="Online" onclick="placeOrderFun2()" required>
+                    <label for="pay2" onclick="placeOrderFun2()">
+                        Pay using Razorpay
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="odersummary">Order Summary</div>
+            <div class="subtotal">
+                <div class="price-text">Subtotal:</div>
+                <div class="price"><i class="fa-solid fa-indian-rupee-sign"></i>@ViewBag.Sum.ToString("#,##,##,###.##")</div>
+            </div>
+            <div class="subtotal">
+                <div class="price-text">Shipping Fee:</div>
+                <div class="price">
+                    <i class="fa-solid fa-indian-rupee-sign"></i>
+                    @((ViewBag.Sum * 0.02).ToString("#,##,##,###.##"))
+                </div>
+            </div>
+            <hr class="hr"></hr>
+            <div class="subtotal">
+                <div class="price-text">Order Total:</div>
+                <div class="price"><i class="fa-solid fa-indian-rupee-sign"></i>@((ViewBag.Sum * 0.02 + ViewBag.Sum).ToString("#,##,##,###.##"))</div>
+            </div>
+            <button type="submit" class="placeorder" id="placeOrderButton">Place Order</button>
+        </div>
+    }
+</section>
+<script>
+    let placeOrderButton = document.getElementById("placeOrderButton");
+    function placeOrderFun1() {
+        placeOrderButton.innerHTML = "Place Order"
+    }
+
+    function placeOrderFun2() {
+        placeOrderButton.innerHTML = "Place Order and Pay"
+    }
+</script>

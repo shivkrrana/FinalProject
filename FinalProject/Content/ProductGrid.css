@@ -1,0 +1,117 @@
+﻿.productgrid {
+    margin:30px;
+}
+.productNotFound {
+    font-size: 60px;
+    color: #c5c5c5;
+    text-align:center;
+    height: 100%;
+    width: 100%;
+    margin-top: 200px;
+}
+
+.productgrid .heading-add {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+        .productgrid .heading-add .heading {
+            font-size: 35px;
+        }
+
+        .productgrid .heading-add .addbtn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 15px;
+            height: 40px;
+            background-color: #4f61e9;
+            border-radius: 5px;
+            color: white;
+            /* border:none; */
+            cursor: pointer;
+        }
+
+    .productgrid .product-container {
+        display: flex;
+        flex-wrap: wrap;
+        height:100%;
+    }
+
+        .productgrid .product-container .box {
+            /* width: 17rem; */
+            margin: 20px;
+            /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+            align-items: center;
+            border: 15px solid #fff;
+            box-shadow: 0 5px 35px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            background-color: white;
+        }
+
+            .productgrid .product-container .box .imgBx {
+                position: relative;
+                border-radius: 10px;
+                width: 12rem;
+                height: 12rem;
+                background-color: #f2f2f2;
+                border-radius: 10px;
+            }
+
+                .productgrid .product-container .box .imgBx img {
+                    position: absolute;
+                    border-radius: 10px;
+                    height: 100%;
+                    width: 100%;
+                    /*object-fit: cover;*/
+                }
+
+
+        .productgrid .product-container .product-name {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-top: 0.3rem;
+        }
+
+        .productgrid .product-container .product-price {
+            font-size: 1rem;
+            text-align: center;
+            color: #7f7f7f;
+        }
+
+            .productgrid .product-container .product-price i {
+                font-size: 13px;
+                margin-right: 3px;
+            }
+
+        .productgrid .product-container .edit-delete {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .productgrid .product-container .edit {
+            padding: 7px 20px;
+            background-color: #1acf3c;
+            margin-right: 30px;
+            font-size: 13px;
+            border-radius: 5px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .productgrid .product-container .delete {
+            padding: 7px 15px;
+            background-color: #ff5e5e;
+            font-size: 13px;
+            border-radius: 5px;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }

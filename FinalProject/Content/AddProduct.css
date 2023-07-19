@@ -1,0 +1,150 @@
+﻿.admin .main-container .content .form-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100%;
+}
+.admin .main-container .content .form {
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    padding: 40px;
+    border-radius: 20px;
+    background-color: white;
+}
+    .admin .main-container .content .form #allimg .imgBx {
+        position: relative;
+        width: 45px;
+        margin-right: 10px;
+        margin-bottom: 5px;
+        height: 45px;
+        border: 5px solid rgb(225, 225, 225);
+        border-radius: 5px;
+    }
+
+        .admin .main-container .content .form #allimg .imgBx img {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            z-index: 5;
+        }
+
+        .admin .main-container .content .form #allimg .imgBx .cross {
+            position: absolute;
+            right: -9px;
+            top: -9px;
+            border-radius: 50%;
+            height: 13px;
+            width: 13px;
+            font-size: 13px;
+            background-color: rgb(225, 225, 225);
+            z-index: 4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+    .admin .main-container .content .form .title {
+        font-size: 35px;
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .admin .main-container .content .form label {
+        font-size: 18px;
+        color: #464646;
+        /* margin-bottom: 10px; */
+    }
+
+    .admin .main-container .content .form textarea {
+        width: 350px;
+        display: block;
+        outline: none;
+        border: 1px solid rgb(227, 227, 227);
+        border-radius: 5px;
+        /* height: 40px; */
+        margin-top: 3px;
+        padding: 10px;
+        font-size: 15px;
+    }
+
+    .admin .main-container .content .form input {
+        width: 350px;
+        display: block;
+        outline: none;
+        border: 1px solid rgb(227, 227, 227);
+        border-radius: 5px;
+        height: 40px;
+        margin-top: 3px;
+        padding: 10px;
+        font-size: 15px;
+    }
+    .admin .main-container .content .form select {
+        /*width: 350px;*/
+        /*display: block;*/
+        width:auto;
+        outline: none;
+        border: 1px solid rgb(227, 227, 227);
+        border-radius: 5px;
+        height: 40px;
+        margin-bottom: 15px;
+        margin-top: 3px;
+        padding: 0 20px;
+        font-size: 15px;
+    }
+        .admin .main-container .content .form #category{
+            margin-right:10px;
+        }
+
+        .admin .main-container .content .form .images {
+            width: 350px;
+            border: 1px solid rgb(227, 227, 227);
+            border-radius: 5px;
+            /* height: 40px; */
+            margin-bottom: 15px;
+            margin-top: 3px;
+            padding: 10px;
+            /* font-size: 15px; */
+        }
+
+        .admin .main-container .content .form .images input {
+            width: auto !important;
+            border: none !important;
+            border-radius: 5px;
+            height: auto !important;
+            margin-bottom: 10px !important;
+            margin-top: 3px;
+            /* opacity: 0; */
+            padding: 0 !important;
+            font-size: 15px;
+        }
+
+
+.admin .main-container .content .form .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    background-color: #4f61e9;
+    border-radius: 5px;
+    padding: 6px 15px;
+    font-size: 18px;
+    color: white;
+    margin-bottom: 0;
+    /* width: auto; */
+    /* margin:0 20px; */
+    border: none;
+    cursor: pointer;
+}
+
+.admin .main-container .content .form button {
+    background-color: #4f61e9;
+    border-radius: 5px;
+    padding: 3px 10px;
+    font-size: 18px;
+    color: white;
+    /* width: auto; */
+    /* margin:0 20px; */
+    border: none;
+    cursor: pointer;
+    /* border: 1px solid red; */
+}

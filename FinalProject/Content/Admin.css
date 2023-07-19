@@ -1,0 +1,157 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&family=Montserrat&family=Roboto+Slab&family=Roboto:wght@100&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+.validation-message {
+    color: red;
+    display: block;
+    margin-bottom: 15px;
+    font-size: 15px
+}
+
+html::-webkit-scrollbar {
+    width: 0.8vw;
+}
+
+a {
+    text-decoration: none;
+    color:inherit;
+}
+a:hover{
+    text-decoration:none!important;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #9e9e9e;
+    border-radius: 1vw;
+}
+
+    html::-webkit-scrollbar-thumb:hover {
+        background-color: #8b8b8b;
+        border-radius: 1vw;
+    }
+
+html::-webkit-scrollbar-track {
+    background-color: #dfdfdf;
+}
+
+.admin {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    min-height: 100vh;
+    padding: 40px 50px;
+}
+
+    .admin .main-container {
+        display: flex;
+        border: 1px solid rgb(239, 239, 239);
+        background-color: #fcfcfc;
+        border-radius: 20px;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        /* height: 100%; */
+    }
+
+
+        .admin .main-container .sidebar {
+            border-right: 0.5px solid rgb(239, 239, 239);
+            background-color: rgb(255, 255, 255);
+            /* border-radius: 20px; */
+            /* overflow: hidden; */
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+            /* background-color: rgb(253, 253, 253); */
+        }
+
+            .admin .main-container .sidebar .title {
+                color: #4f61e9;
+                font-size: 28px;
+                /* padding: 10px 0; */
+                margin: 20px 0;
+                text-align: center;
+            }
+
+                .admin .main-container .sidebar .title i {
+                    margin-right: 5px;
+                }
+
+            .admin .main-container .sidebar hr {
+                border: 0.5px solid rgb(239, 239, 239);
+            }
+
+            .admin .main-container .sidebar ul {
+                list-style: none;
+                font-size: 18px;
+                margin: 40px 0;
+            }
+
+                .admin .main-container .sidebar ul li {
+                    padding: 10px 60px 10px 20px;
+                    margin: 10px 15px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    /* border: 1px solid red; */
+                }
+
+
+                    .admin .main-container .sidebar ul li div {
+                        width: 35px;
+                        /* border: 1px solid red; */
+                    }
+
+                        .admin .main-container .sidebar ul li div i {
+                            color: rgb(189, 185, 185);
+                            margin-right: 5px;
+                        }
+
+                    .admin .main-container .sidebar ul li span {
+                        color: rgb(81, 81, 81);
+                        margin-right: 5px;
+                    }
+
+                    .admin .main-container .sidebar ul li:hover {
+                        background-color: rgb(229, 236, 253);
+                        border-radius: 5px;
+                        color: rgb(87, 94, 227) !important;
+                        transition: 0.4s;
+                    }                    
+
+.hoverWhenCLicked {
+    background-color: rgb(229, 236, 253);
+    border-radius: 5px;
+    color: rgb(87, 94, 227) !important;
+}
+
+.admin .main-container .sidebar .logout {
+    display: flex;
+    justify-content: center;
+    margin: 35px 0;
+}
+
+
+    .admin .main-container .sidebar .logout .btn {
+        background-color: #4f61e9;
+        border-radius: 5px;
+        padding: 8px 20px;
+        font-size: 15px;
+        color: white;
+        /* margin:0 20px; */
+        border: none;
+        cursor: pointer;
+        /* border: 1px solid red; */
+    }
+
+.admin .main-container .content {
+    /*display: flex;
+    justify-content: center;
+    align-items: center;*/
+    width: 100%;
+    /* background-color: #fcfcfc; */
+}

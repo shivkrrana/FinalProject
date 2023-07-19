@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="dashboard">
+    <div class="heading">Dashboard</div>
+
+    <div>
+        <div class="widget">
+            <div class="single-widget">
+                <span id="sales"><i class="fa-solid fa-indian-rupee-sign"></i></span>
+                <div class="title-value">
+                    <div class="title">Total Sales</div>
+                    <div class="value">@ViewBag.TotalSale.ToString("#,##,##,###.##")</div>
+                </div>
+            </div>
+
+            <div class="single-widget">
+                <span id="orders"><i class="fa-solid fa-user-group"></i></span>
+                <div class="title-value">
+                    <div class="title">Total Customers</div>
+                    <div class="value">@ViewBag.userCount</div>
+                </div>
+            </div>
+
+            <div class="single-widget">
+                <span id="products"><i class="fa-solid fa-box-archive"></i></span>
+                <div class="title-value">
+                    <div class="title">Total Products</div>
+                    <div class="value">@ViewBag.productCount</div>
+                </div>
+            </div>
+
+            <div class="single-widget">
+                <span id="brands"><i class="fa-solid fa-tags"></i></span>
+                <div class="title-value">
+                    <div class="title">Total Brands</div>
+                    <div class="value">@ViewBag.brandCount</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="background-color:white;border-radius:10px;margin-top:20px;padding:30px;width:96%">
+            <canvas id="myChart" style="height: 400px;width: 100%;"></canvas>
+        </div>
+    </div>
+
+    
+    <script>
+        // Get the canvas element
+        var ctx = document.getElementById('myChart').getContext('2d');
+
+        // Define the chart data
+        var chartData = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June','July','August','September','October','November','December'],
+            datasets: [{
+                label: 'Sales',
+                data: @Html.Raw(Json.Encode(ViewBag.Chart)),
+                backgroundColor: '#42cbf5'
+            }]
+        };
+
+        // Create the chart
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 10000
+                        }
+                    }
+                }
+            }
+        });
+
+    </script>
+</section>
+

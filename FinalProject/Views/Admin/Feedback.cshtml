@@ -1,0 +1,26 @@
+﻿@model List<FinalProject.Models.Feedback>
+
+@{
+    ViewBag.Title = "Feedback";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="feedback">
+    <div class="title">Feedbacks</div>
+
+    <div class="feedback-container">
+
+        @foreach (var i in Model)
+        {
+            <div class="each-feedback">
+                <div class="name-date">
+                    <div class="username">@i.UserName</div>
+                    <div class="date">@i.CreatedDate.ToString("dd-MM-yyyy")</div>
+                </div>
+                <div class="message">@i.Message</div>
+            </div>
+        }
+
+    </div>
+</section>
+

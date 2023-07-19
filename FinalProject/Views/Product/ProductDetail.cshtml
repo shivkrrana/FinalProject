@@ -1,0 +1,161 @@
+﻿@model FinalProject.Models.Product
+
+<section class="product_deatil_page">
+    <div class="product_detail">
+        <div class="product_image">
+            <div class="multiple_images">
+                @{
+                    foreach (var i in Model.ProductImages)
+                    {
+                        var base64 = Convert.ToBase64String(i.Data);
+                        var imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+                        <div class="imgBx">
+                            <img class="hover_img" src="@imgSrc">
+                        </div>
+                    }
+                }
+            </div>
+            <div class="single_image">
+                <div class="imgBx">
+                    @{
+                        var base6 = Convert.ToBase64String(Model.ProductImages[0].Data);
+                        var Src = string.Format("data:image/gif;base64,{0}", base6);
+                        <img id="main_img" src="@Src">
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="title">@Model.Title</div>
+            <div class="rating">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-regular fa-star"></i>
+                <small>(58 customers reviews)</small>
+            </div>
+            <div class="price">MRP:&nbsp;<i class="fa-solid fa-indian-rupee-sign"></i>@Model.Price.ToString("#,##,##,###.##")</div>
+            <p>@Model.Description</p>
+            <div class="features">
+                <div class="common">
+                    <div><i class="fa-solid fa-truck"></i></div>
+                    <small>Free Delivery</small>
+                </div>
+                <div class="common">
+                    <div><i class="fa-solid fa-arrows-rotate"></i></div>
+                    <small>30 Days Replacement</small>
+                </div>
+                <div class="common">
+                    <div><i class="fa-solid fa-trophy"></i></div>
+                    <small>Top Brand</small>
+                </div>
+                <div class="common">
+                    <div><i class="fa-solid fa-shield-halved"></i></div>
+                    <small>2 year Warranty</small>
+                </div>
+            </div>
+
+            <div class="other_info">
+                Available:
+                @if (ViewBag.Stock == 0)
+                {
+                    <span style="color:red">Out of Stock</span>
+                }
+                else if (ViewBag.Stock < 4)
+                {
+                    <span style="color:red">Hurry only @ViewBag.Stock item Left !</span>
+                }
+                else
+                {
+                    <span style="color:green">In Stock</span>
+                }
+            </div>
+            <div class="other_info">ID: <span>@Model.ProductId</span></div>
+            <div class="other_info">Brand: <span>@Model.Brand.Name</span></div>
+            <hr>
+            <!-- <div style="display: flex;align-items: center;"><button class="inc_dec">-</button><span class="qty">1</span><button class="inc_dec">+</button></div> -->
+            <div>
+                @if (ViewBag.Stock > 0)
+                {
+                    <div class="inc_dec">
+                        <i id="minusProductCount" class="fa-solid fa-minus"></i><span id="showQuantity">1</span><i id="plusProductCount" class="fa-solid fa-plus"></i>
+                        <div id="maxValue" class="maxValue" style="display:none">Max @ViewBag.Stock item can be Added</div>
+                    </div>
+                    using (Ajax.BeginForm("AddToCart", "User", new { id = Model.ProductId },
+                                                    new AjaxOptions()
+                                                    {
+                                                        HttpMethod = "POST",
+                                                        InsertionMode = InsertionMode.Replace,
+                                                        UpdateTargetId = "kart",
+                                                        LoadingElementDuration = 1000,
+                                                        LoadingElementId = "loader"
+                                                    }))
+                    {
+                        <input id="inputQty" type="number" name="quantity" value="1" hidden />
+                        <button class="btn" type="submit">ADD TO CART</button>
+                    }
+                }
+                else
+                {
+                    <div class="productNotAvailable" style="color:red;font-size:20px;">Currently Unavailable</div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    const stock = '@Html.Raw(ViewBag.Stock)';
+    const maxValue = document.getElementById("maxValue");
+    const all_img = document.querySelectorAll(".hover_img");
+    const main_img = document.getElementById("main_img");
+    const minusProductCount = document.getElementById("minusProductCount");
+    const plusProductCount = document.getElementById("plusProductCount");
+    let inputQty = document.getElementById("inputQty");
+    let showQuantity = document.getElementById("showQuantity");
+
+    all_img[0].classList.add("btnnSelected");
+    var x = 0;
+    all_img.forEach((item, index) => {
+        item.addEventListener('mouseover', event => {
+            main_img.src = item.src;
+            item.classList.add("btnnSelected");
+            if (x != index)
+                all_img[x].classList.remove("btnnSelected");
+            x = index;
+        })
+    })
+
+    minusProductCount.addEventListener("click", () => {
+        var y = inputQty.value;
+        y = parseInt(y)
+        if (y > 1) {
+            inputQty.value = y - 1;
+            showQuantity.innerHTML = y - 1;
+        }
+    })
+    plusProductCount.addEventListener("click", () => {
+        var y = inputQty.value;
+        y = parseInt(y)
+        if (y < stock) {
+            inputQty.value = y + 1;
+            showQuantity.innerHTML = y + 1;
+        }
+    })
+
+
+    plusProductCount.addEventListener('mousemove', () => {
+        if (parseInt(inputQty.value) === parseInt(stock)) {
+            console.log(parseInt(inputQty.value),stock)
+            maxValue.style.display = "block";
+        }
+        })
+        plusProductCount.addEventListener('mouseleave', () => {
+            maxValue.style.display = "none";
+        })
+    
+</script>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>

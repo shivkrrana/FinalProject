@@ -1,0 +1,48 @@
+﻿@model List<FinalProject.Models.Product>
+
+@{
+    ViewBag.Title = "Inventory";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<section class="inventory">
+    <div class="title">Inventory</div>
+    <div class="container">
+        <div class="sub-container">
+            <div class="heading">
+                <div class="head-title" style="width:150px;margin-left: 30px;">Product</div>
+                <div class="head-title" style="width: 100px;margin-right: 50px;">Product ID</div>
+                <div class="head-title" style="width: 350px;text-align: left;">Title</div>
+
+                <div class="head-title">Available Quantity</div>
+                <div class="head-title">Add Quantity</div>
+            </div>
+            @if (Model.Count() > 0)
+            {
+                foreach (var i in Model)
+                {
+                    var base64 = Convert.ToBase64String(i.ProductImages[0].Data);
+                    var imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+                    <div class="row">
+                        <div class="row-data" style="width:150px;margin-left: 30px;"><img src="@imgSrc" height="40px" width="40px"></div>
+                        <div class="row-data" style="width: 100px;margin-right: 50px;">@i.ProductId</div>
+                        <div class="row-data" style="width: 350px; justify-content: left;">@i.Title</div>
+                        <div class="row-data">@i.Inventory.Stock</div>
+                        <div class="row-data">
+                            @using (Html.BeginForm("AddStock", "Admin", FormMethod.Post, new { @class = "action" }))
+                            {
+                                <input name="id" value="@i.ProductId" hidden />
+                                <input type="number" name="qty" required><button type="submit" class="btn">Add</button>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="noproductfound">No Product Found</div>
+            }
+        </div>
+    </div>
+</section>
+

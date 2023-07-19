@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rana Store</title>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/HomeCSS.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/RegisterCSS.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/ProductDetailCSS.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/CartCSS.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/ProductsCSS.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/CheckoutCSS.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/YourOrder.css")" />
+
+</head>
+<body>
+    
+   @Html.Partial("_NavBar")
+
+   @RenderBody()
+
+   @Html.Partial("_Footer")
+
+</body>
+</html>

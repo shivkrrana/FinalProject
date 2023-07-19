@@ -1,0 +1,126 @@
+﻿@model List<FinalProject.Models.Order>
+
+@{
+    ViewBag.Title = "Orders";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="orders">
+    <h1 class="title">Your Order</h1>
+    @if(Model.Count() > 0){
+        for(int i = 0; i < Model.Count() ; i++)
+        {
+        <div class="container">
+            <div class="tablehead">
+                <div class="content">
+                    <div class="contenttitle">ORDER PLACED</div>
+                    <div class="contentvalue">@Model[i].CreatedDate</div>
+                </div>
+                <div class="content">
+                    <div class="contenttitle">TOTAL</div>
+                    @{ 
+                        decimal sum = 0;
+                    }
+                    @for(int k = i; k < Model.Count(); k++)
+                    {
+                        if(Model[i].OrderId == Model[k].OrderId)
+                        {
+                            sum += Model[k].Quantity * Model[k].Product.Price;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    @{ 
+                        decimal amount = (sum + (2 * sum)/100);
+                        amount = Math.Round(amount, 2);
+                        string formattedAmount = amount.ToString("#,##,##,###.##");
+                    }
+                <div class="contentvalue"><i class="fa-solid fa-indian-rupee-sign" style="font-size:13px;margin-right:3px"></i>@formattedAmount</div>
+                </div>
+                <div class="content">
+                    <div class="contenttitle">SHIP TO</div>
+                    <div class="contentvalue shipname" style="color: rgb(85, 85, 232);">@Model[i].Address.Name</div>
+                    <div class="address hoveraddress" style="display: none;">
+                        <div style="font-weight: bold;">@Model[i].Address.Name</div>
+                        <div>@Model[i].Address.Region1</div>
+                        <div>@Model[i].Address.City, @Model[i].Address.State, @Model[i].Address.Pincode</div>
+                        <div>Phone number: @Model[i].Address.Phone</div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="contenttitle">MODE OF PAYMENT</div>
+                    <div class="contentvalue" style="text-align:center">@Model[i].PaymentMode</div>
+                </div>
+                <div class="content">
+                    <div class="contenttitle">ORDER #@Model[i].OrderId</div>
+                </div>
+            </div>
+            <hr>
+            @for (int j = i; j < Model.Count(); j++)
+            {
+                if (Model[j].OrderId == Model[i].OrderId)
+                {
+                    var base64 = Convert.ToBase64String(Model[j].Product.ProductImages[0].Data);
+                    var imgSrc = string.Format("data:image/gif;base64,{0}", base64);
+                    <div class="productrow">
+                        <div class="img">
+                            <img src="@imgSrc" alt="">
+                            <div class="quantity">@Model[j].Quantity</div>
+                        </div>
+                        <div class="titleandaction">
+                            <div class="producttitle">
+                                @Model[j].Product.Title
+                            </div>
+                            <div class="btns">
+                                @using (Ajax.BeginForm("AddToCart", "User", new { id = Model[j].ProductId, quantity = 1 },
+                                                            new AjaxOptions()
+                                                            {
+                                                                HttpMethod = "POST",
+                                                                InsertionMode = InsertionMode.Replace,
+                                                                UpdateTargetId = "kart",
+                                                                LoadingElementDuration = 1000,
+                                                                LoadingElementId = "loader"
+                                                            }))
+                                {
+                                    <button class="btn1">Buy it again</button>
+                                }
+
+                                <a href="@Url.Action("ProductDetail","Product", new { id = Model[j].ProductId })"><button class="btn2">View item</button></a>
+                            </div>
+                        </div>
+                    </div>
+                    i = j;
+                }
+                else
+                {
+                    i = j-1;
+                    break;
+                }
+            }
+        </div>
+        }
+    }
+    else
+            {
+                <div class="orderNotFound">No Order Found</div>
+            }
+</section>
+<script>
+    const shipname = document.querySelectorAll(".shipname");
+    const hoveraddress = document.querySelectorAll(".hoveraddress");
+
+    shipname.forEach((item, index) => {
+        item.addEventListener('mouseover', () => {
+            hoveraddress[index].style.display = "block";
+        })
+        item.addEventListener('mouseout', () => {
+            hoveraddress[index].style.display = "none";
+        })
+    })
+
+</script>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
